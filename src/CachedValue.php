@@ -16,7 +16,7 @@ class CachedValue extends Model {
     public $reload_after_save = false;
 
 
-    public function init(): void {
+    protected function init(): void {
 
         parent::init();
 
