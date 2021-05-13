@@ -2,16 +2,18 @@
 
 namespace cachedvalueforatk\tests;
 
-use atk4\core\AtkPhpunit\TestCase;
-use atk4\data\Persistence;
+use traitsforatkdata\TestCase;
+use Atk4\Data\Persistence;
 use atk4\schema\Migration;
-use atk4\ui\App;
+use Atk4\Ui\App;
 use cachedvalueforatk\CachedValue;
 use cachedvalueforatk\CachedValuesTrait;
 
 
 class CachedValuesTraitTest extends TestCase
 {
+
+    protected $sqlitePersistenceModels = [CachedValue::class];
 
     public function testgetCachedValue()
     {
@@ -39,7 +41,7 @@ class CachedValuesTraitTest extends TestCase
                 function () {
                     return 'Duggu';
                 },
-                120
+                1
             )
         );
         usleep(1500000);
@@ -100,9 +102,7 @@ class CachedValuesTraitTest extends TestCase
             public $always_run = false;
         };
 
-        $persistence = Persistence::connect('sqlite::memory:');
-        $model1 = new CachedValue($persistence);
-        Migration::of($model1)->drop()->create();
+        $persistence = $this->getSqliteTestPersistence();
 
         $instance = new $class();
         $instance->db = $persistence;
