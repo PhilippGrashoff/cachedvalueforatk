@@ -2,7 +2,7 @@
 
 namespace cachedvalueforatk;
 
-use atk4\data\Model;
+use Atk4\Data\Model;
 use traitsforatkdata\CreatedDateAndLastUpdatedTrait;
 
 
